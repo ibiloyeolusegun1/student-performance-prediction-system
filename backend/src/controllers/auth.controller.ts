@@ -3,8 +3,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
 
-
 export const login = async (req: Request, res: Response): Promise<void> => {
+  console.log("LOGIN CONTROLLER HIT");
+  console.log(req.body);
+
   try {
     const { username, password } = req.body;
 
@@ -17,6 +19,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const user = await User.findOne({ username });
+    console.log("USER FOUND:", user);
 
     if (!user) {
       res.status(401).json({
@@ -27,6 +30,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("PASSWORD MATCH:", isMatch);
 
     if (!isMatch) {
       res.status(401).json({
