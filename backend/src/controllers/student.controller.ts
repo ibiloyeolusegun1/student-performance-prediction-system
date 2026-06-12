@@ -7,7 +7,18 @@ export const createStudent = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const student = await Student.create(req.body);
+    const prediction = await predictPerformance({
+      attendance,
+      assignmentScore,
+      testScore,
+      studyHours,
+      caScore,
+    });
+
+    const student = await Student.create({
+      ...req.body,
+      prediction,
+    });
 
     res.status(201).json({
       success: true,
