@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Student from "../models/Student";
+import { predictPerformance } from "../services/prediction.service";
 
 export const createStudent = async (
   req: Request,
@@ -134,6 +135,27 @@ export const deleteStudent = async (
     res.status(500).json({
       success: false,
       message: "Failed to delete student",
+    });
+  }
+};
+
+export const predictStudentPerformance = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const prediction = await predictPerformance(req.body);
+
+    res.status(200).json({
+      success: true,
+      prediction,
+    });
+  } catch (error: any) {
+    console.error("PREDICTION ERROR:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error?.toString() || "Prediction failed",
     });
   }
 };
