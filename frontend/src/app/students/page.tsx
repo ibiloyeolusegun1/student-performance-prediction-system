@@ -24,17 +24,6 @@ export default function StudentsPage() {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-
-    fetchStudents();
-  }, []);
-
   const fetchStudents = async () => {
     try {
       const response = await api.get("/students");
@@ -48,9 +37,20 @@ export default function StudentsPage() {
     }
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
+    fetchStudents();
+  }, []);
+
   const deleteStudent = async (id: string) => {
     const confirmed = window.confirm(
-      "Are you sure you want to delete this student?"
+      "Are you sure you want to delete this student?",
     );
 
     if (!confirmed) return;
@@ -58,9 +58,7 @@ export default function StudentsPage() {
     try {
       await api.delete(`/students/${id}`);
 
-      setStudents((prev) =>
-        prev.filter((student) => student._id !== id)
-      );
+      setStudents((prev) => prev.filter((student) => student._id !== id));
 
       alert("Student deleted successfully");
     } catch (error) {
@@ -95,9 +93,7 @@ export default function StudentsPage() {
       {/* Header */}
 
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">
-          Student Management
-        </h1>
+        <h1 className="text-3xl font-bold">Student Management</h1>
 
         <button
           onClick={() => router.push("/students/create")}
@@ -125,30 +121,19 @@ export default function StudentsPage() {
           <tbody>
             {students.length > 0 ? (
               students.map((student) => (
-                <tr
-                  key={student._id}
-                  className="border-b"
-                >
-                  <td className="p-3">
-                    {student.studentId}
-                  </td>
+                <tr key={student._id} className="border-b">
+                  <td className="p-3">{student.studentId}</td>
 
-                  <td className="p-3">
-                    {student.name}
-                  </td>
+                  <td className="p-3">{student.name}</td>
 
-                  <td className="p-3">
-                    {student.department}
-                  </td>
+                  <td className="p-3">{student.department}</td>
 
-                  <td className="p-3">
-                    {student.level}
-                  </td>
+                  <td className="p-3">{student.level}</td>
 
                   <td className="p-3">
                     <span
                       className={`text-white px-3 py-1 rounded ${predictionBadge(
-                        student.prediction
+                        student.prediction,
                       )}`}
                     >
                       {student.prediction}
@@ -157,20 +142,14 @@ export default function StudentsPage() {
 
                   <td className="p-3 flex gap-2">
                     <button
-                      onClick={() =>
-                        router.push(
-                          `/students/${student._id}`
-                        )
-                      }
+                      onClick={() => router.push(`/students/${student._id}`)}
                       className="bg-green-600 text-white px-3 py-1 rounded"
                     >
                       View
                     </button>
 
                     <button
-                      onClick={() =>
-                        deleteStudent(student._id)
-                      }
+                      onClick={() => deleteStudent(student._id)}
                       className="bg-red-600 text-white px-3 py-1 rounded"
                     >
                       Delete
@@ -180,10 +159,7 @@ export default function StudentsPage() {
               ))
             ) : (
               <tr>
-                <td
-                  colSpan={6}
-                  className="text-center p-6"
-                >
+                <td colSpan={6} className="text-center p-6">
                   No students found
                 </td>
               </tr>

@@ -7,6 +7,8 @@ export const createStudent = async (
   res: Response,
 ): Promise<void> => {
   try {
+    const { attendance, assignmentScore, testScore, studyHours, caScore } = req.body;
+
     const prediction = await predictPerformance({
       attendance,
       assignmentScore,

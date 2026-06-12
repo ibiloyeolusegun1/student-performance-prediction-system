@@ -27,17 +27,6 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<DashboardData | null>(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-
-    fetchDashboardStats();
-  }, []);
-
   const fetchDashboardStats = async () => {
     try {
       const response = await api.get("/dashboard/stats");
@@ -50,6 +39,17 @@ export default function DashboardPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
+    fetchDashboardStats();
+  }, []);
 
   if (loading) {
     return (
