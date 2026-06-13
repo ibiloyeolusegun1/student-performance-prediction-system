@@ -27,17 +27,6 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<DashboardData | null>(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-
-    fetchDashboardStats();
-  }, []);
-
   const fetchDashboardStats = async () => {
     try {
       const response = await api.get("/dashboard/stats");
@@ -50,6 +39,17 @@ export default function DashboardPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
+    fetchDashboardStats();
+  }, []);
 
   if (loading) {
     return (
@@ -66,15 +66,31 @@ export default function DashboardPage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Student Performance Dashboard</h1>
 
-        <button
-          onClick={() => {
-            localStorage.removeItem("token");
-            router.push("/login");
-          }}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={() => router.push("/students")}
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Students
+          </button>
+
+          <button
+            onClick={() => router.push("/reports")}
+            className="bg-purple-600 text-white px-4 py-2 rounded"
+          >
+            Reports
+          </button>
+
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              router.push("/login");
+            }}
+            className="bg-red-500 text-white px-4 py-2 rounded"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Statistics Cards */}
