@@ -147,7 +147,14 @@ export default function StudentsPage() {
                     >
                       View
                     </button>
-
+                    <button
+                      onClick={() =>
+                        router.push(`/students/${student._id}/edit`)
+                      }
+                      className="bg-yellow-500 text-white px-3 py-1 rounded"
+                    >
+                      Edit
+                    </button>
                     <button
                       onClick={() => deleteStudent(student._id)}
                       className="bg-red-600 text-white px-3 py-1 rounded"
