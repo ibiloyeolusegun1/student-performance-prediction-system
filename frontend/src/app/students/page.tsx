@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/services/api";
+import Layout from "@/components/Layout";
 
 interface Student {
   _id: string;
@@ -89,7 +90,7 @@ export default function StudentsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <Layout>
       {/* Header */}
 
       <div className="flex justify-between items-center mb-6">
@@ -174,6 +175,6 @@ export default function StudentsPage() {
           </tbody>
         </table>
       </div>
-    </div>
+    </Layout>
   );
 }
