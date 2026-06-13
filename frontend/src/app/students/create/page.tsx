@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/services/api";
+import Layout from "@/components/Layout";
 
 export default function CreateStudentPage() {
   const router = useRouter();
@@ -88,128 +89,130 @@ export default function CreateStudentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow">
-        <h1 className="text-3xl font-bold mb-6">Add Student</h1>
+    <Layout>
+      <div className="min-h-screen bg-gray-100 p-6">
+        <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow">
+          <h1 className="text-3xl font-bold mb-6">Add Student</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="studentId"
-            placeholder="Student ID"
-            value={formData.studentId}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              name="studentId"
+              placeholder="Student ID"
+              value={formData.studentId}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="text"
-            name="name"
-            placeholder="Student Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="text"
+              name="name"
+              placeholder="Student Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="text"
-            name="department"
-            placeholder="Department"
-            value={formData.department}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="text"
+              name="department"
+              placeholder="Department"
+              value={formData.department}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="text"
-            name="level"
-            placeholder="Level"
-            value={formData.level}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="text"
+              name="level"
+              placeholder="Level"
+              value={formData.level}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="number"
-            name="attendance"
-            placeholder="Attendance"
-            value={formData.attendance}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="number"
+              name="attendance"
+              placeholder="Attendance"
+              value={formData.attendance}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="number"
-            name="assignmentScore"
-            placeholder="Assignment Score"
-            value={formData.assignmentScore}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="number"
+              name="assignmentScore"
+              placeholder="Assignment Score"
+              value={formData.assignmentScore}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="number"
-            name="testScore"
-            placeholder="Test Score"
-            value={formData.testScore}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="number"
+              name="testScore"
+              placeholder="Test Score"
+              value={formData.testScore}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="number"
-            name="studyHours"
-            placeholder="Study Hours"
-            value={formData.studyHours}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="number"
+              name="studyHours"
+              placeholder="Study Hours"
+              value={formData.studyHours}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          <input
-            type="number"
-            name="caScore"
-            placeholder="CA Score"
-            value={formData.caScore}
-            onChange={handleChange}
-            className="w-full border p-3 rounded"
-            required
-          />
+            <input
+              type="number"
+              name="caScore"
+              placeholder="CA Score"
+              value={formData.caScore}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+              required
+            />
 
-          {prediction && (
-            <div className="bg-blue-100 border border-blue-300 p-4 rounded">
-              <h3 className="font-semibold">Predicted Performance:</h3>
+            {prediction && (
+              <div className="bg-blue-100 border border-blue-300 p-4 rounded">
+                <h3 className="font-semibold">Predicted Performance:</h3>
 
-              <p className="text-xl font-bold mt-2">{prediction}</p>
+                <p className="text-xl font-bold mt-2">{prediction}</p>
+              </div>
+            )}
+
+            <div className="flex gap-4">
+              <button
+                type="button"
+                onClick={handlePredict}
+                className="bg-yellow-500 text-white px-6 py-3 rounded"
+              >
+                Predict Performance
+              </button>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-green-600 text-white px-6 py-3 rounded"
+              >
+                {loading ? "Saving..." : "Save Student"}
+              </button>
             </div>
-          )}
-
-          <div className="flex gap-4">
-            <button
-              type="button"
-              onClick={handlePredict}
-              className="bg-yellow-500 text-white px-6 py-3 rounded"
-            >
-              Predict Performance
-            </button>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-green-600 text-white px-6 py-3 rounded"
-            >
-              {loading ? "Saving..." : "Save Student"}
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
