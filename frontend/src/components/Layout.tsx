@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import ProtectedRoute from "./ProtectedRoute";
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,14 +11,16 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
+    <ProtectedRoute>
+      <div className="flex min-h-screen bg-gray-100">
+        <Sidebar />
 
-      <div className="flex-1">
-        <Navbar />
+        <div className="flex-1">
+          <Navbar />
 
-        <main className="p-6">{children}</main>
+          <main className="p-6">{children}</main>
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }
