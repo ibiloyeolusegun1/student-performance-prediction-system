@@ -145,7 +145,7 @@ export default function ReportsPage() {
           {/* Pie Chart */}
 
           <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-bold mb-4">Performance Distribution</h2>
+            <h2 className="text-xl text-gray-800 font-bold mb-4">Performance Distribution</h2>
 
             <ResponsiveContainer width="100%" height={350}>
               <PieChart>
@@ -164,7 +164,7 @@ export default function ReportsPage() {
           {/* Bar Chart */}
 
           <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-bold mb-4">Performance Comparison</h2>
+            <h2 className="text-xl text-gray-800 font-bold mb-4">Performance Comparison</h2>
 
             <ResponsiveContainer width="100%" height={350}>
               <BarChart data={barData}>

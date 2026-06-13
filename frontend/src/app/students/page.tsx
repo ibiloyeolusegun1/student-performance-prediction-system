@@ -96,7 +96,7 @@ export default function StudentsPage() {
       {/* Header */}
 
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Student Management</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Student Management</h1>
 
         <button
           onClick={() => router.push("/students/create")}
@@ -108,10 +108,10 @@ export default function StudentsPage() {
 
       {/* Students Table */}
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         {/* Table Header */}
 
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between px-6 py-5 border-b border-gray-100">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between px-3 py-4 border-b border-gray-100">
           <div>
             <h2 className="text-xl font-semibold text-gray-900">Students</h2>
 
@@ -131,27 +131,27 @@ export default function StudentsPage() {
           <table className="w-full">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                   Student
                 </th>
 
-                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                   Student ID
                 </th>
 
-                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                   Department
                 </th>
 
-                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                   Level
                 </th>
 
-                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                   Prediction
                 </th>
 
-                <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <th className="px-63py-42text-right text-xs font-semibold text-gray-500">
                   Actions
                 </th>
               </tr>
@@ -166,9 +166,9 @@ export default function StudentsPage() {
                   >
                     {/* Student */}
 
-                    <td className="px-6 py-4">
+                    <td className="px-3 py-2">
                       <div className="flex items-center gap-3">
-                        <div className="h-11 w-11 rounded-full bg-blue-100 text-blue-700 font-semibold flex items-center justify-center">
+                        <div className="h-9 w-9 rounded-full bg-blue-100 text-blue-700 font-semibold flex items-center justify-center">
                           {student.name
                             .split(" ")
                             .map((n) => n[0])
@@ -178,11 +178,11 @@ export default function StudentsPage() {
                         </div>
 
                         <div>
-                          <p className="font-medium text-gray-900">
+                          <p className="font-medium text-sm text-gray-900">
                             {student.name}
                           </p>
 
-                          <p className="text-sm text-gray-500">
+                          <p className="text-xs text-gray-500">
                             Student Record
                           </p>
                         </div>
@@ -191,41 +191,41 @@ export default function StudentsPage() {
 
                     {/* Student ID */}
 
-                    <td className="px-6 py-4">
-                      <span className="font-medium text-gray-700">
+                    <td className="px-3 py-2">
+                      <span className="font-medium text-sm text-gray-700">
                         {student.studentId}
                       </span>
                     </td>
 
                     {/* Department */}
 
-                    <td className="px-6 py-4 text-gray-700">
+                    <td className="px-3 py-2 text-sm text-gray-700">
                       {student.department}
                     </td>
 
                     {/* Level */}
 
-                    <td className="px-6 py-4">
-                      <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+                    <td className="px-3 py-2">
+                      <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">
                         Level {student.level}
                       </span>
                     </td>
 
                     {/* Prediction */}
 
-                    <td className="px-6 py-4">
+                    <td className="px-3 py-2 text-sm">
                       <PredictionBadge prediction={student.prediction} />
                     </td>
 
                     {/* Actions */}
 
-                    <td className="px-6 py-4">
+                    <td className="px-3 py-2">
                       <div className="flex justify-end gap-2">
                         <button
                           onClick={() =>
                             router.push(`/students/${student._id}`)
                           }
-                          className="px-3 py-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 font-medium transition cursor-pointer"
+                          className="px-2.5 py-1.5 text-sm rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 font-medium transition cursor-pointer"
                         >
                           View
                         </button>
@@ -234,14 +234,14 @@ export default function StudentsPage() {
                           onClick={() =>
                             router.push(`/students/${student._id}/edit`)
                           }
-                          className="px-3 py-2 rounded-lg bg-yellow-50 text-yellow-700 hover:bg-yellow-100 font-medium transition cursor-pointer"
+                          className="px-2.5 py-1.5 text-sm rounded-lg bg-yellow-50 text-yellow-700 hover:bg-yellow-100 font-medium transition cursor-pointer"
                         >
                           Edit
                         </button>
 
                         <button
                           onClick={() => deleteStudent(student._id)}
-                          className="px-3 py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 font-medium transition cursor-pointer"
+                          className="px-2.5 py-1.5 text-sm rounded-lg bg-red-50 text-red-600 hover:bg-red-100 font-medium transition cursor-pointer"
                         >
                           Delete
                         </button>

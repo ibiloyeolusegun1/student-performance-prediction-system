@@ -88,7 +88,7 @@ export default function DashboardPage() {
               Reports
             </button>
 
-            <button
+            {/* <button
               onClick={() => {
                 localStorage.removeItem("token");
                 router.push("/login");
@@ -96,7 +96,7 @@ export default function DashboardPage() {
               className="bg-red-500 text-white px-4 py-2 rounded cursor-pointer"
             >
               Logout
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -149,23 +149,23 @@ export default function DashboardPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                     Student
                   </th>
 
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                     Student ID
                   </th>
 
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                     Department
                   </th>
 
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                     Level
                   </th>
 
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-500">
                     Prediction
                   </th>
                 </tr>
@@ -179,9 +179,9 @@ export default function DashboardPage() {
                       className="hover:bg-gray-50 transition-colors duration-200"
                     >
                       {/* Student Info */}
-                      <td className="px-6 py-4">
+                      <td className="px-3 py-2">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-semibold">
+                          <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-semibold">
                             {student.name
                               ?.split(" ")
                               .map((n) => n[0])
@@ -191,11 +191,11 @@ export default function DashboardPage() {
                           </div>
 
                           <div>
-                            <p className="font-medium text-gray-900">
+                            <p className="font-medium text-sm text-gray-900">
                               {student.name}
                             </p>
 
-                            <p className="text-sm text-gray-500">
+                            <p className="text-xs text-gray-500">
                               Student Record
                             </p>
                           </div>
@@ -203,26 +203,26 @@ export default function DashboardPage() {
                       </td>
 
                       {/* Student ID */}
-                      <td className="px-6 py-4">
-                        <span className="font-medium text-gray-700">
+                      <td className="px-3 py-2">
+                        <span className="font-medium text-sm text-gray-700">
                           {student.studentId}
                         </span>
                       </td>
 
                       {/* Department */}
-                      <td className="px-6 py-4 text-gray-700">
+                      <td className="px-3 py-2 text-sm text-gray-700">
                         {student.department}
                       </td>
 
                       {/* Level */}
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+                      <td className="px-3 py-2">
+                        <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">
                           Level {student.level}
                         </span>
                       </td>
 
                       {/* Prediction */}
-                      <td className="px-6 py-4">
+                      <td className="px-3 py-2 text-sm">
                         <PredictionBadge prediction={student.prediction} />
                       </td>
                     </tr>
