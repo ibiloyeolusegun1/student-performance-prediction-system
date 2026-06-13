@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import api from "@/services/api";
 import Layout from "@/components/Layout";
 import Loader from "@/components/loader";
+import PredictionBadge from "@/components/PredictionBadge";
 
 interface Student {
   _id: string;
@@ -107,74 +108,176 @@ export default function StudentsPage() {
 
       {/* Students Table */}
 
-      <div className="bg-white rounded-lg shadow overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="p-3 text-left">Student ID</th>
-              <th className="p-3 text-left">Name</th>
-              <th className="p-3 text-left">Department</th>
-              <th className="p-3 text-left">Level</th>
-              <th className="p-3 text-left">Prediction</th>
-              <th className="p-3 text-left">Actions</th>
-            </tr>
-          </thead>
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+        {/* Table Header */}
 
-          <tbody>
-            {students.length > 0 ? (
-              students.map((student) => (
-                <tr key={student._id} className="border-b">
-                  <td className="p-3">{student.studentId}</td>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between px-6 py-5 border-b border-gray-100">
+          <div>
+            <h2 className="text-xl font-semibold text-gray-900">Students</h2>
 
-                  <td className="p-3">{student.name}</td>
+            <p className="text-sm text-gray-500">
+              Manage and monitor student performance predictions
+            </p>
+          </div>
 
-                  <td className="p-3">{student.department}</td>
+          <div className="mt-3 md:mt-0">
+            <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+              {students.length} Students
+            </span>
+          </div>
+        </div>
 
-                  <td className="p-3">{student.level}</td>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-gray-50 border-b border-gray-200">
+                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Student
+                </th>
 
-                  <td className="p-3">
-                    <span
-                      className={`text-white px-3 py-1 rounded ${predictionBadge(
-                        student.prediction,
-                      )}`}
-                    >
-                      {student.prediction}
-                    </span>
-                  </td>
+                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Student ID
+                </th>
 
-                  <td className="p-3 flex gap-2">
-                    <button
-                      onClick={() => router.push(`/students/${student._id}`)}
-                      className="bg-green-600 text-white px-3 py-1 rounded"
-                    >
-                      View
-                    </button>
-                    <button
-                      onClick={() =>
-                        router.push(`/students/${student._id}/edit`)
-                      }
-                      className="bg-yellow-500 text-white px-3 py-1 rounded"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => deleteStudent(student._id)}
-                      className="bg-red-600 text-white px-3 py-1 rounded"
-                    >
-                      Delete
-                    </button>
+                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Department
+                </th>
+
+                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Level
+                </th>
+
+                <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Prediction
+                </th>
+
+                <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+
+            <tbody className="divide-y divide-gray-100">
+              {students.length > 0 ? (
+                students.map((student) => (
+                  <tr
+                    key={student._id}
+                    className="hover:bg-gray-50 transition duration-200"
+                  >
+                    {/* Student */}
+
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="h-11 w-11 rounded-full bg-blue-100 text-blue-700 font-semibold flex items-center justify-center">
+                          {student.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .slice(0, 2)
+                            .toUpperCase()}
+                        </div>
+
+                        <div>
+                          <p className="font-medium text-gray-900">
+                            {student.name}
+                          </p>
+
+                          <p className="text-sm text-gray-500">
+                            Student Record
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* Student ID */}
+
+                    <td className="px-6 py-4">
+                      <span className="font-medium text-gray-700">
+                        {student.studentId}
+                      </span>
+                    </td>
+
+                    {/* Department */}
+
+                    <td className="px-6 py-4 text-gray-700">
+                      {student.department}
+                    </td>
+
+                    {/* Level */}
+
+                    <td className="px-6 py-4">
+                      <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+                        Level {student.level}
+                      </span>
+                    </td>
+
+                    {/* Prediction */}
+
+                    <td className="px-6 py-4">
+                      <PredictionBadge prediction={student.prediction} />
+                    </td>
+
+                    {/* Actions */}
+
+                    <td className="px-6 py-4">
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() =>
+                            router.push(`/students/${student._id}`)
+                          }
+                          className="px-3 py-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 font-medium transition cursor-pointer"
+                        >
+                          View
+                        </button>
+
+                        <button
+                          onClick={() =>
+                            router.push(`/students/${student._id}/edit`)
+                          }
+                          className="px-3 py-2 rounded-lg bg-yellow-50 text-yellow-700 hover:bg-yellow-100 font-medium transition cursor-pointer"
+                        >
+                          Edit
+                        </button>
+
+                        <button
+                          onClick={() => deleteStudent(student._id)}
+                          className="px-3 py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 font-medium transition cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} className="py-16 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="h-20 w-20 rounded-full bg-gray-100 flex items-center justify-center text-3xl">
+                        🎓
+                      </div>
+
+                      <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                        No Students Found
+                      </h3>
+
+                      <p className="text-sm text-gray-500 mt-1">
+                        Start by adding your first student record.
+                      </p>
+
+                      <button
+                        onClick={() => router.push("/students/create")}
+                        className="mt-5 bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition"
+                      >
+                        Add Student
+                      </button>
+                    </div>
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={6} className="text-center p-6">
-                  No students found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );
