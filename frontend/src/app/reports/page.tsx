@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/services/api";
 import Layout from "@/components/Layout";
+import StatCard from "@/components/StatCard";
 
 import {
   PieChart,
@@ -59,11 +60,11 @@ export default function ReportsPage() {
   }, []);
 
   if (loading) {
-     return (
-          <div>
-            <Loader />;
-          </div>
-        );
+    return (
+      <div>
+        <Loader />;
+      </div>
+    );
   }
 
   const pieData = [
@@ -104,11 +105,11 @@ export default function ReportsPage() {
         {/* Header */}
 
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Student Performance Reports</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Student Performance Reports</h1>
 
           <button
             onClick={() => router.push("/dashboard")}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
           >
             Dashboard
           </button>
@@ -117,35 +118,25 @@ export default function ReportsPage() {
         {/* Summary Cards */}
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white shadow rounded-lg p-5">
-            <h3 className="text-gray-500">Total Students</h3>
+          <StatCard title="Total Students" value={stats?.totalStudents || 0} />
 
-            <p className="text-3xl font-bold">{stats?.totalStudents}</p>
-          </div>
+          <StatCard
+            title="Excellent Students"
+            value={stats?.excellentStudents || 0}
+            color="text-green-600"
+          />
 
-          <div className="bg-white shadow rounded-lg p-5">
-            <h3 className="text-gray-500">Excellent</h3>
+          <StatCard
+            title="Average Students"
+            value={stats?.averageStudents || 0}
+            color="text-yellow-600"
+          />
 
-            <p className="text-3xl font-bold text-green-600">
-              {stats?.excellentStudents}
-            </p>
-          </div>
-
-          <div className="bg-white shadow rounded-lg p-5">
-            <h3 className="text-gray-500">Average</h3>
-
-            <p className="text-3xl font-bold text-yellow-600">
-              {stats?.averageStudents}
-            </p>
-          </div>
-
-          <div className="bg-white shadow rounded-lg p-5">
-            <h3 className="text-gray-500">Poor</h3>
-
-            <p className="text-3xl font-bold text-red-600">
-              {stats?.poorStudents}
-            </p>
-          </div>
+          <StatCard
+            title="Poor Students"
+            value={stats?.poorStudents || 0}
+            color="text-red-600"
+          />
         </div>
 
         {/* Charts */}
@@ -154,7 +145,7 @@ export default function ReportsPage() {
           {/* Pie Chart */}
 
           <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-bold mb-4">Performance Distribution</h2>
+            <h2 className="text-xl text-gray-800 font-bold mb-4">Performance Distribution</h2>
 
             <ResponsiveContainer width="100%" height={350}>
               <PieChart>
@@ -173,7 +164,7 @@ export default function ReportsPage() {
           {/* Bar Chart */}
 
           <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-bold mb-4">Performance Comparison</h2>
+            <h2 className="text-xl text-gray-800 font-bold mb-4">Performance Comparison</h2>
 
             <ResponsiveContainer width="100%" height={350}>
               <BarChart data={barData}>
