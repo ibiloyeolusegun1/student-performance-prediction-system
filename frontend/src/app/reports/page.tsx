@@ -18,6 +18,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
+import Loader from "@/components/loader";
 
 interface DashboardStats {
   totalStudents: number;
@@ -58,11 +59,11 @@ export default function ReportsPage() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        Loading Reports...
-      </div>
-    );
+     return (
+          <div>
+            <Loader />;
+          </div>
+        );
   }
 
   const pieData = [

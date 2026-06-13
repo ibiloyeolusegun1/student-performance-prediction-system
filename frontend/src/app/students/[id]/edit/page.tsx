@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import api from "@/services/api";
 import Layout from "@/components/Layout";
+import Loader from "@/components/loader";
 
 export default function EditStudentPage() {
   const router = useRouter();
@@ -124,8 +125,8 @@ export default function EditStudentPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        Loading...
+      <div>
+        <Loader />;
       </div>
     );
   }

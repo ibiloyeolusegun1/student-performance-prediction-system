@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/services/api";
 import Layout from "@/components/Layout";
+import Loader from "@/components/loader";
 
 interface RecentStudent {
   _id: string;
@@ -54,8 +55,8 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        Loading dashboard...
+      <div>
+        <Loader />;
       </div>
     );
   }

@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/lib/isAuthenticated";
+import Loader from "@/components/loader";
+import Loading from "./loading";
 
 export default function HomePage() {
   const router = useRouter();
@@ -17,7 +19,7 @@ export default function HomePage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      Redirecting...
+      <Loading />
     </div>
   );
 }
